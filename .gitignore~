@@ -1,6 +1,8 @@
+<<<<<<< HEAD
 bower_components/
 build/
 node_modules/
+=======
 # Logs
 logs
 *.log
@@ -59,3 +61,5 @@ typings/
 
 # dotenv environment variables file
 .env
+
+>>>>>>> 0cac672766307049cf66084ba637350f56edb9a8
