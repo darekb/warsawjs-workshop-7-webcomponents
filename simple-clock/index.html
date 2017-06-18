@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Simple clock</title>
+    <meta name="viewport"
+          content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi">
     <script type="application/javascript" src="node_modules/webcomponents.js/webcomponents-lite.min.js"></script>
     <script type="application/javascript" src="node_modules/moment-js/moment.js"></script>
     <script type="application/javascript" src="node_modules/qrjs/qr.js"></script>
-    <link rel="import" href="components/simple-wraper" />
-
+    <link rel="import" href="components/simple-wraper.html" />
     <style type="text/css">
         @font-face {
             font-family: 'WWDigital';
@@ -17,9 +18,15 @@
             font-weight: normal;
             font-style: normal;
         }
+        html, body{
+            width:100%;
+            height:100%;
+            min-height: 100%;
+            display: flex;
+        }
     </style>
 </head>
 <body>
-    <simple-wraper></simple-wraper>
+    <simple-wraper style="margin:auto;"></simple-wraper>
 </body>
 </html>

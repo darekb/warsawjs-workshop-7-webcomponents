@@ -1,5 +1,5 @@
-<link rel="import" href="simple-clock"/>
-<link rel="import" href="../node_modules/webcomponent-qr-code/src/qr-code" />
+<link rel="import" href="simple-clock.html"/>
+<link rel="import" href="../node_modules/webcomponent-qr-code/src/qr-code.html" />
 <template>
     <style type="text/css">
         .container {
@@ -26,6 +26,7 @@
         var template = thisDoc.querySelector('template').content;
 
         class Wraper extends HTMLElement {
+
             constructor() {
                 super();
                 this.shadowDom = this.attachShadow({mode: 'open'});
@@ -38,7 +39,6 @@
                 this.$clock = this.shadowDom.querySelector('simple-clock');
                 this.$qrCode = this.shadowDom.querySelector('qr-code');
             }
-
 
             connectedCallback() {
                 this.$clock.addEventListener('alarm', (e) => {
