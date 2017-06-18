@@ -1,0 +1,66 @@
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-simple-clock2">
+    <template>
+        <style include="shared-styles">
+            :host {
+                display: block;
+                height: 100px;
+                color: white;
+                margin: 1rem;
+                font-family: arial;
+                overflow: auto;
+                --theme: red;
+                background: var(--theme, red);
+            }
+
+            .clock {
+                line-height: 100px;
+                font-size: 2rem;
+                text-align: center;
+                color: white;
+            }
+        </style>
+
+        <div class="clock">[[time]]</div>
+    </template>
+
+    <script>
+        class MySimpleClock2 extends Polymer.Element {
+            static get is() {
+                return 'my-simple-clock2';
+            }
+
+            static get properties() {
+                return {
+                    time: {
+                        type: String,
+                        notify: true
+                    },
+                    theme: {
+                        type: String,
+                        observer: '_themeChanged'
+                    }
+                };
+            }
+
+            ready() {
+                super.ready();
+                setInterval(() => {
+                    var currentdate = new Date();
+                    var datetime = currentdate.getHours() + ":"
+                        + currentdate.getMinutes() + ":"
+                        + currentdate.getSeconds();
+                    this.time = datetime;
+                }, 1000);
+            }
+
+            _themeChanged() {
+                this.style.setProperty(`--theme`, this.theme);
+            }
+        }
+        window.customElements.define(MySimpleClock2.is, MySimpleClock2);
+    </script>
+</dom-module>
