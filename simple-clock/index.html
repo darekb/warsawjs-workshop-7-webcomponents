@@ -5,7 +5,8 @@
     <title>Simple clock</title>
     <script type="application/javascript" src="node_modules/webcomponents.js/webcomponents-lite.min.js"></script>
     <script type="application/javascript" src="node_modules/moment-js/moment.js"></script>
-    <link rel="import" href="components/simple-clock" />
+    <script type="application/javascript" src="node_modules/qrjs/qr.js"></script>
+    <link rel="import" href="components/simple-wraper" />
 
     <style type="text/css">
         @font-face {
@@ -19,15 +20,6 @@
     </style>
 </head>
 <body>
-    <h1>Hello world</h1>
-    <simple-clock class="test" theme="green" alarm="15:30:00"></simple-clock>
-    <script type="application/javascript">
-       document.querySelector('.test').addEventListener('alarm', function (e){
-           document.querySelector('.test').setAttribute('theme', 'red');
-           setTimeout(()=>{
-               document.querySelector('.test').setAttribute('theme', 'green');
-           }, 3000);
-       })
-    </script>
+    <simple-wraper></simple-wraper>
 </body>
 </html>

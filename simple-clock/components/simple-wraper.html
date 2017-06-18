@@ -1,0 +1,57 @@
+<link rel="import" href="simple-clock"/>
+<link rel="import" href="../node_modules/webcomponent-qr-code/src/qr-code" />
+<template>
+    <style type="text/css">
+        .container {
+            display: flex;
+            width: 600px;
+            margin: auto;
+        }
+    </style>
+    <div class="container">
+        <qr-code data="hello world!" class="qrcode" margin="2" modulesize="6"></qr-code>
+        <simple-clock class="test" theme="green" alarm="18:00:00" style="width:100%;"></simple-clock>
+    </div>
+</template>
+<script type="application/javascript">
+    (function (window, document, undefined) {
+
+        // Refers to the "importer", which is index.html
+        var thatDoc = document;
+
+        // Refers to the "importee", which is vimeo-embed.html
+        var thisDoc = (thatDoc._currentScript || thatDoc.currentScript).ownerDocument;
+
+        // Gets content from <template>.
+        var template = thisDoc.querySelector('template').content;
+
+        class Wraper extends HTMLElement {
+            constructor() {
+                super();
+                this.shadowDom = this.attachShadow({mode: 'open'});
+                this.cacheDom();
+            }
+
+            cacheDom() {
+                var clone = thatDoc.importNode( template, true );
+                this.shadowDom.appendChild(clone);
+                this.$clock = this.shadowDom.querySelector('simple-clock');
+                this.$qrCode = this.shadowDom.querySelector('qr-code');
+            }
+
+
+            connectedCallback() {
+                this.$clock.addEventListener('alarm', (e) => {
+                    this.$clock.setAttribute('theme', 'red');
+                    setTimeout(() => {
+                        this.$clock.setAttribute('theme', 'green');
+                    }, 3000);
+                });
+                this.$clock.addEventListener('tick', (e) => {
+                    this.$qrCode.setAttribute('data', e.detail.time);
+                })
+            }
+        }
+        window.customElements.define('simple-wraper', Wraper);
+    })(window, document);
+</script>
