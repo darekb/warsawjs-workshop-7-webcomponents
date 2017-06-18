@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "http-server": "^0.10.0",
+    "moment-js": "^1.1.15",
+    "momentjs": "^2.0.0",
     "server": "^1.0.0-beta.1",
     "webcomponents.js": "^0.7.24"
   }

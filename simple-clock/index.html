@@ -4,15 +4,30 @@
     <meta charset="UTF-8">
     <title>Simple clock</title>
     <script type="application/javascript" src="node_modules/webcomponents.js/webcomponents-lite.min.js"></script>
+    <script type="application/javascript" src="node_modules/moment-js/moment.js"></script>
     <link rel="import" href="components/simple-clock" />
+
+    <style type="text/css">
+        @font-face {
+            font-family: 'WWDigital';
+            src: url('/assets/WWDigital.woff') format('woff'),
+            url('/assets/WWDigital.ttf') format('truetype'),
+            url('/assets/WWDigital.svg#WWDigital') format('svg');
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
 </head>
 <body>
     <h1>Hello world</h1>
-    <simple-clock class="test" theme="green"></simple-clock>
+    <simple-clock class="test" theme="green" alarm="15:30:00"></simple-clock>
     <script type="application/javascript">
-        setTimeout(() => {
-            document.querySelector('.test').setAttribute('theme','red');
-        }, 1000);
+       document.querySelector('.test').addEventListener('alarm', function (e){
+           document.querySelector('.test').setAttribute('theme', 'red');
+           setTimeout(()=>{
+               document.querySelector('.test').setAttribute('theme', 'green');
+           }, 3000);
+       })
     </script>
 </body>
 </html>

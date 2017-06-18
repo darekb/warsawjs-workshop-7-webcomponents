@@ -9,15 +9,20 @@
         }
         .container.red{
             background: red;
+            animation: animatedBackground 0.7s linear infinite;
         }
         .container.green{
             background: green;
         }
         .clock {
-            font-family: Arial;
+            font-family: 'WWDigital';
             line-height: 100px;
             font-size: 60px;
             text-align: center;
+        }
+        @keyframes animatedBackground {
+            from { background-color: transparent; }
+            to { background-color: red; }
         }
     </style>
     <div class="container">
@@ -30,6 +35,9 @@
             super();
             this.shadowDom = this.attachShadow({mode: 'open'});
             this.cacheDom();
+            this.alarmTime = '00:00:00';
+            this.eventAlarm = document.createEvent('Event');
+            this.eventAlarm.initEvent('alarm', true, true);
         }
 
         cacheDom(){
@@ -46,19 +54,23 @@
 
         runClock() {
             setInterval(() => {
-                var currentdate = new Date();
-                var datetime = currentdate.getHours() + ":"
-                        + currentdate.getMinutes() + ":"
-                        + currentdate.getSeconds();
-                this.updateClock(datetime);
+                var nowTime = moment().format('h:mm:ss');
+                if(this.alarmTime == nowTime){
+
+                    console.log('test');
+                    this.dispatchEvent(this.eventAlarm);
+                }
+                this.updateClock(nowTime);
             }, 1000);
         }
         updateTheme(newValue){
             this.$container.classList = 'container ' + newValue;
         }
-
+        setAlarm(newValue){
+            this.alarmTime = newValue;
+        }
         static get observedAttributes (){
-            return ['theme'];
+            return ['theme', 'alarm'];
         }
 
         connectedCallback() {
@@ -69,6 +81,9 @@
         attributeChangedCallback(attribute, oldValue, newValue){
             if(attribute == 'theme'){
                 this.updateTheme(newValue);
+            }
+            if(attribute == 'alarm'){
+                this.setAlarm(newValue);
             }
         }
     }
