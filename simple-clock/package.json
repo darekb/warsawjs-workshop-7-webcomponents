@@ -1,0 +1,17 @@
+{
+  "name": "simple-clock",
+  "version": "0.0.1",
+  "description": "Simple clock for testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "http-server ."
+  },
+  "author": "Dariusz Biedrzycki",
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^0.10.0",
+    "server": "^1.0.0-beta.1",
+    "webcomponents.js": "^0.7.24"
+  }
+}
